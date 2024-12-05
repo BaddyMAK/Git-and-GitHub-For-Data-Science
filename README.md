@@ -55,7 +55,7 @@ In this Github repository I am going to mention what a Data scientist will need 
         - 2-  git fetch origin
         - 3- git merge origin/develop 
 - Which Method Should You Use?
-    - Use merge if you want to retain a clear record of when develop changes were integrated into xxx.
+    - Use merge if you want to retain a clear record of when develop changes were integrated into feature/DEV-324.
     - Use rebase if you want a linear commit history with no merge commits. (Ideal for feature branches.)
     - Use pull for simplicity when you don’t mind merge commits (it does fetch + merge).
 
