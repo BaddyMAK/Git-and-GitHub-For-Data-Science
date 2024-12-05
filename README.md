@@ -1,2 +1,61 @@
 # Git and GitHub For Data Science
 In this Github repository I am going to mention what a Data scientist will need to master git and github
+
+### GIT commands 
+- Create branch : git branch branch_name
+- Checkout git checkout branch_name
+- Create and checkout : git checkout -b branch_name
+- Delete branch: 
+    - A local branch that has been fully merged: git branch -d branch_name
+    - A local branch that has not been fully merged (i.e. force delete): git branch -D branch-to-delete
+    - A remote branch, use git push --delete. Assuming that the remote is named origin, you would use the command: git push origin --delete branch-to-delete
+- Current status : git status 
+- Add single file : git add file_name 
+- Add all modified files :  git add . 
+- Commit changes : git commit -m “message”
+- To push : git push origin HEAD
+- To add a full directory : git add directory/ 
+- git add .: adds the entire directory recursively, including files whose names begin with a dot
+- git add -u: stages modified and deleted files only, NOT new files
+- `.gitignore` file. : contain all files that should not be staged  such as  large binary files, and files containing sensitive information like passwords or authentication tokens.
+- git reset :  to move changes out of the staging area git reset HEAD or git reset --mixed HEAD 
+- Set branch to follow remote : git branch --set-upstream-to=origin/develop
+- Push change to remote branch : git push origin feature/DEV-324
+- Read all existing branches : git fetch
+- How to use LFS:
+    - Install : brew install git-lfs
+    - Check correct installation: git lfs install
+    - Track Large File :  git lfs track”*.nii.gz
+    - Add and Commit the Changes:  
+        - git add .gitattributes 
+        - git commit -m "Set up LFS tracking for large files"
+    - Push to Bitbucket or Github: 
+        - git add file1.nii.gz
+        - git commit -m "Add large file using LFS"
+        - git push origin feature/DEV-324
+    - Pull actual files : git lfs pull 
+    - git lfs clone <repo-url>
+    - git clone <repo-url> + git lfs pull
+    - Check files in my lfs: git lfs ls-files
+- To update feature/DEV-324 with changes from develop: 
+    - Method 1: 
+        - 1- git checkout feature/DEV-324
+        - 2- git pull origin develop 
+    - Method 2:
+        - 1- git checkout feature/DEV-324
+        - 2- git fetch origin
+        - 3- git rebase origin/develop
+        - 4- In case there is some conflicts, git will pause and ask you to resolve them . 
+            - After resolving, continue the rebase with: git rebase --continue
+            - If you need to abort the rebase for any reason: git rebase --abort
+        - 5- After completing the rebase, you'll need to force-push your branch feature/DEV-324 if it was already pushed to the remote:
+            - git push origin feature/DEV-324 --force
+    - Method 3:  If you explicitly want to merge (keeping a merge commit), use this approach:
+        - 1- git checkout feature/DEV-324
+        - 2-  git fetch origin
+        - 3- git merge origin/develop 
+- Which Method Should You Use?
+    - Use merge if you want to retain a clear record of when develop changes were integrated into xxx.
+    - Use rebase if you want a linear commit history with no merge commits. (Ideal for feature branches.)
+    - Use pull for simplicity when you don’t mind merge commits (it does fetch + merge).
+
